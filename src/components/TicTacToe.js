@@ -10,13 +10,25 @@ const TicTacToe = () => {
   ]);
   const players = ["x", "o"]
   const [currentPlayer, setCurrentPlayer] = useState(players[Math.round(Math.random())]);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(true);
   const [P1Name, setP1Name] = useState("1P")
   const [P2Name, setP2Name] = useState("2P")
-  const [playerSelect, setPlayerSelect] = useState(true)
   const [playerNumbers, setPlayerNumbers] = useState(0)
 
   const navigate = useNavigate();
+
+  function onePlayer() {
+    if (!playerNumbers) {
+    setPlayerNumbers(1)
+            document.getElementById("1Player").style.display = "none"
+            document.getElementById("P1-name-input").style.display = "inline"
+            setP2Name("COMPUTER")
+            }
+  }
+
+  function twoPlayer() {
+
+  }
 
   function resetBoard() {
     setBoard([
@@ -237,16 +249,22 @@ const TicTacToe = () => {
             </div>
           </div>
           <div id="display-names" className="row">
-            <span className={`player-option clickable highlight`} onClick={() => {setPlayerNumbers(1)
-            setPlayerSelect(false)}}>{P1Name}</span>
-            <input id="P1-name" className="player-option"></input>
-            <span className={`player-option clickable highlight`} onClick={() => {setPlayerNumbers(2)
-            setPlayerSelect(false)}}>{P2Name}</span>
-            <input id="P2-name" className="player-option"></input>
+            <span className='player-option clickable highlight' id="1Player" onClick={onePlayer}>{P1Name}</span>
+            <input id="P1-name-input" className="player-option" value={P1Name} onChange={(e) => setP1Name(e.value)}></input>
+            <span className='player-option clickable highlight' id="2Player" onClick={() => {setPlayerNumbers(2)}}>{P2Name}</span>
+            <input id="P2-name-input" className="player-option" value={P2Name} onChange={(e) => setP2Name(e.value)}></input>
           </div>
         </div>
+        <div>
         <div className="highlight clickable button" onClick={resetBoard}>
           Reset
+        </div>
+        <div className="highlight clickable button" onClick={() => navigate('/tictactoe')}>
+          Players
+        </div>
+        <div className="highlight clickable button">
+          Submit
+        </div>
         </div>
       </div>
     </div>

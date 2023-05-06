@@ -6,7 +6,7 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+/* START MENU CSS */
 #app {
   position: fixed;
   bottom: 7%;
@@ -50,7 +50,7 @@ html {
 .clickable {
     cursor: pointer;
 }
-
+/* TICTACTOE CSS */
 .cell {
     width: 100px;
     height: 100px;
@@ -91,7 +91,7 @@ html {
 
 .player-option {
     padding: 10px 15px;
-    width: 100px;
+    width: 100%;
     text-align: center;
 }
 
@@ -109,6 +109,10 @@ html {
     text-align: center;
 }
 
-#P1-name, #P2-name {
+#P1-name-input, #P2-name-input {
     display: none;
+    background-color: black;
+    color: #20C20E;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 19.2px;
 }
