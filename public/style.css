@@ -1,0 +1,114 @@
+html {
+    background-image: url("/images/desktop-wallpaper-png-television-set-transparent-television-set-png-vintage-tv.jpg");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#app {
+  position: fixed;
+  bottom: 7%;
+  top: 0;
+  left: 0;
+  right: 15%;
+  margin: auto;
+  aspect-ratio: 1.5;
+  color: white;
+  background-color: black;
+  width: 52%;
+  font-family: 'Press Start 2P', cursive;
+  color: #20C20E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-options {
+    max-height: 104.8px;
+}
+
+.row, #game-options, .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-option {
+    background-color: white;
+    width: 150px;
+    height: 100px;
+    margin: 0px 10px;
+    border: 3px solid #20C20E;
+}
+
+.game-option:hover {
+    border: 6px solid #20C20E;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.cell:nth-child(3n+2) {
+    border-right: 5px #20C20E solid;
+    border-left: 5px #20C20E solid;
+}
+
+.cell:nth-child(n+4):nth-child(-n+6) {
+    border-bottom: 5px #20C20E solid;
+    border-top: 5px #20C20E solid;
+}
+
+.board {
+    display: flex;
+    height: 310px;
+    width: 310px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#display-names {
+    justify-content: space-between;
+}
+
+#tictactoe {
+    font-size: larger;
+}
+
+.title {
+    text-align: center;
+    margin: 25px 0px;
+}
+
+.player-option {
+    padding: 10px 15px;
+    width: 100px;
+    text-align: center;
+}
+
+.highlight:hover {
+    background-color: #20C20E;
+    color: black;
+}
+
+.button {
+    padding: 15px 10px;
+}
+
+.back-button {
+    width: 40px;
+    text-align: center;
+}
+
+#P1-name, #P2-name {
+    display: none;
+}
