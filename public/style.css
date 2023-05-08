@@ -35,6 +35,13 @@ html {
     align-items: center;
 }
 
+.column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .game-option {
     background-color: white;
     width: 150px;
@@ -89,9 +96,9 @@ html {
     margin: 25px 0px;
 }
 
-.player-option {
+.player-option, #P1-name-input, #P2-name-input {
     padding: 10px 15px;
-    width: 100%;
+    width: 180px;
     text-align: center;
 }
 
