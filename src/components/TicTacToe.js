@@ -53,9 +53,10 @@ const TicTacToe = () => {
     } else if (currentPlayer === "o") {
       setCurrentPlayer("x");
     }
+    setMessage(`${currentPlayer.toUpperCase()}'s turn`)
   }
 
-  function inputTurn(x, y) {
+  function inputTurn(x, y, currentPlayer) {
     if (!board[y][x]) {
       let boardCopy = [...board];
       boardCopy[y][x] = currentPlayer;
@@ -68,11 +69,13 @@ const TicTacToe = () => {
     let potentialMoves = []
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
-        if (!gameState.board[i][j]) {
+        if (!board[i][j]) {
           potentialMoves.push([j, i])}}
-    } 
+    } if (potentialMoves.length) {
     let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
-    inputTurn(move[0], move[1])
+    if (currentPlayer === "x") {inputTurn(move[0], move[1], "o")
+  setCurrentPlayer("x")} else {inputTurn(move[0], move[1], "x")
+setCurrentPlayer("o")}}
   }
 
   function checkAcross() {
@@ -163,7 +166,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 0);
+                    inputTurn(0, 0, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -175,7 +179,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 0);
+                    inputTurn(1, 0, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -187,7 +192,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 0);
+                    inputTurn(2, 0, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -199,7 +205,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 1);
+                    inputTurn(0, 1, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -211,7 +218,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 1);
+                    inputTurn(1, 1, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -223,7 +231,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 1);
+                    inputTurn(2, 1, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -235,7 +244,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 2);
+                    inputTurn(0, 2, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -247,7 +257,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 2);
+                    inputTurn(1, 2, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
@@ -259,7 +270,8 @@ const TicTacToe = () => {
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 2);
+                    inputTurn(2, 2, currentPlayer);
+                    if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
             >
