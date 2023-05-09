@@ -8,12 +8,12 @@ const TicTacToe = () => {
     [null, null, null],
     [null, null, null],
   ]);
-  const players = ["x", "o"]
-  const [currentPlayer, setCurrentPlayer] = useState(players[Math.round(Math.random())]);
   const [playerSelect, setPlayerSelect] = useState(true)
   const [gameOver, setGameOver] = useState(true);
   const [P1Name, setP1Name] = useState("1P")
   const [P2Name, setP2Name] = useState("2P")
+  const players = [["x", P1Name], ["o", P2Name]]
+  const [currentPlayer, setCurrentPlayer] = useState(players[Math.round(Math.random())]);
   const [playerNumbers, setPlayerNumbers] = useState(0)
 
   const navigate = useNavigate();
@@ -44,16 +44,17 @@ const TicTacToe = () => {
       [null, null, null],
     ]);
     setGameOver(false);
-    setMessage("Start");
+    setMessage(`${currentPlayer[1]}'s Turn`);
   }
 
   function switchPlayer() {
-    if (currentPlayer === "x") {
-      setCurrentPlayer("o");
-    } else if (currentPlayer === "o") {
-      setCurrentPlayer("x");
+    if (currentPlayer[0] === "x") {
+      setCurrentPlayer(["o", P2Name]);
+      setMessage(`${P2Name}'s Turn`)
+    } else if (currentPlayer[0] === "o") {
+      setCurrentPlayer(["x", P1Name]);
+      setMessage(`${P1Name}'s Turn`)
     }
-    setMessage(`${currentPlayer.toUpperCase()}'s turn`)
   }
 
   function inputTurn(x, y, currentPlayer) {
@@ -66,16 +67,20 @@ const TicTacToe = () => {
   }
 
   function computerTurn() {
-    let potentialMoves = []
+    setTimeout(() => {
+      let potentialMoves = []
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
         if (!board[i][j]) {
           potentialMoves.push([j, i])}}
     } if (potentialMoves.length) {
     let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
-    if (currentPlayer === "x") {inputTurn(move[0], move[1], "o")
-  setCurrentPlayer("x")} else {inputTurn(move[0], move[1], "x")
-setCurrentPlayer("o")}}
+    if (currentPlayer[0] === "x") {inputTurn(move[0], move[1], "o")
+  setCurrentPlayer(["x", P1Name])
+setMessage(`${P1Name}'s Turn`)} else {inputTurn(move[0], move[1], "x")
+setCurrentPlayer(["o", P2Name])
+setMessage(`${P2Name}'s Turn`)}}
+    }, 2000);
   }
 
   function checkAcross() {
@@ -166,7 +171,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 0, currentPlayer);
+                    inputTurn(0, 0, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -179,7 +184,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 0, currentPlayer);
+                    inputTurn(1, 0, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -192,7 +197,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 0, currentPlayer);
+                    inputTurn(2, 0, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -205,7 +210,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 1, currentPlayer);
+                    inputTurn(0, 1, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -218,7 +223,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 1, currentPlayer);
+                    inputTurn(1, 1, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -231,7 +236,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 1, currentPlayer);
+                    inputTurn(2, 1, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -244,7 +249,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(0, 2, currentPlayer);
+                    inputTurn(0, 2, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -257,7 +262,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(1, 2, currentPlayer);
+                    inputTurn(1, 2, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -270,7 +275,7 @@ setCurrentPlayer("o")}}
                   if (gameOver) {
                       return;
                     }
-                    inputTurn(2, 2, currentPlayer);
+                    inputTurn(2, 2, currentPlayer[0]);
                     if (playerNumbers === 1) {computerTurn()}
                     checkWin();
               }}
@@ -279,9 +284,9 @@ setCurrentPlayer("o")}}
             </div>
           </div>
           <div id="display-names" className="row">
-            <span className={`player-option ${gameOver && !playerNumbers ? "clickable highlight" : null}`} id="1Player" onClick={onePlayer}>{P1Name}</span>
+            <span className={`player-option ${gameOver && !playerNumbers ? "clickable highlight" : null} ${currentPlayer[0] === "x" && !gameOver ? "active" : null}`} id="1Player" onClick={onePlayer}>{P1Name}</span>
             <input id="P1-name-input" className="player-option" value={P1Name} onChange={(e) => setP1Name(e.target.value)}></input>
-            <span className={`player-option ${gameOver && !playerNumbers ? "clickable highlight" : null}`} id="2Player" onClick={twoPlayer}>{P2Name}</span>
+            <span className={`player-option ${gameOver && !playerNumbers ? "clickable highlight" : null} ${currentPlayer[0] === "o" && !gameOver ? "active" : null}`} id="2Player" onClick={twoPlayer}>{P2Name}</span>
             <input id="P2-name-input" className="player-option" value={P2Name} onChange={(e) => setP2Name(e.target.value)}></input>
           </div>
         </div>
@@ -312,6 +317,8 @@ setCurrentPlayer("o")}}
           document.getElementById("2Player").style.display = "inline"
             document.getElementById("P1-name-input").style.display = "none"
             document.getElementById("P2-name-input").style.display = "none"
+            setCurrentPlayer(players[Math.round(Math.random())])
+            setMessage(`${currentPlayer[1]}'s Turn`)
         }}>
           Submit
         </div> : null}

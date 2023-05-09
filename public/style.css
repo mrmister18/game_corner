@@ -107,6 +107,11 @@ html {
     color: black;
 }
 
+.active {
+    background-color: #20C20E;
+    color: black;
+}
+
 .button {
     padding: 15px 10px;
 }
