@@ -133,3 +133,78 @@ html {
     font-family: 'Press Start 2P', cursive;
     font-size: 19.2px;
 }
+/* HANGMAN CSS */
+.setup {
+    border: 1px solid white;
+}
+
+#hangman-visual {
+    height: 320px;
+    aspect-ratio: 2/3;
+    align-items: flex-end;
+}
+
+#floor {
+    height: 5%;
+    width: 34%;
+}
+
+#rafter {
+    height: 5%;
+    width: 74%;
+    margin-right: 5%;
+}
+
+#between {
+    height: 90%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#hanged-man {
+    height: 85%;
+    width: 50%;
+}
+
+#pole {
+    height: 100%;
+    width: 10%;
+}
+
+#left-arm, #right-arm {
+    height: 40%;
+    width: 15%;
+}
+
+#center {
+    height: 100%;
+    width: 70%;
+}
+
+#legs {
+    width: 100%;
+    height: 40%;
+    justify-content: space-between;
+}
+
+#body {
+    width: 100%;
+    height: 30%;
+}
+
+#head {
+    width: 50%;
+    height: 15%;
+    border-radius: 50%;
+}
+
+#rope {
+    width: 10%;
+    height: 15%;
+}
+
+#left-leg, #right-leg {
+    height: 100%;
+    width: 40%;
+}

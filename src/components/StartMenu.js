@@ -9,7 +9,7 @@ const StartMenu = () => {
         <div id='game-options'>
        <div className='game-option clickable' id='tictactoe-preview' onClick={() => {navigate("/tictactoe")}}>
        </div>
-       <div className='game-option clickable'>
+       <div className='game-option clickable' id='hangman-preview' onClick={() => {navigate("/hangman")}}>
        </div>
        </div>
     </div>
