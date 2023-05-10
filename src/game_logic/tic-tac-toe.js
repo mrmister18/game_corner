@@ -1,60 +1,14 @@
-export function onePlayer() {
-  if (!playerNumbers) {
-  setPlayerNumbers(1)
-          document.getElementById("1Player").style.display = "none"
-          document.getElementById("P1-name-input").style.display = "inline"
-          setP2Name("COMPUTER")
-          }
-}
-
-export function twoPlayer() {
-  if (!playerNumbers) {
-    setPlayerNumbers(2)
-            document.getElementById("1Player").style.display = "none"
-            document.getElementById("2Player").style.display = "none"
-            document.getElementById("P1-name-input").style.display = "inline"
-            document.getElementById("P2-name-input").style.display = "inline"
-            }
-}
+let board = [[null, null, null], [null, null, null], [null, null, null]]
 
 export function resetBoard() {
-  setBoard([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ]);
-  setGameOver(false);
-  setMessage("Start");
+  board = [[null, null, null], [null, null, null], [null, null, null]]
+  return board
 }
 
-function switchPlayer() {
-  if (currentPlayer === "x") {
-    setCurrentPlayer("o");
-  } else if (currentPlayer === "o") {
-    setCurrentPlayer("x");
-  }
+export function inputTurn(y, x, input) {
+  board[x][y] = input
+  return board
 }
-
-export function inputTurn(x, y) {
-  if (!board[y][x]) {
-    let boardCopy = [...board];
-    boardCopy[y][x] = currentPlayer;
-    setBoard(boardCopy);
-    switchPlayer();
-  }
-}
-
-export function computerTurn() {
-  let potentialMoves = []
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      if (!gameState.board[i][j]) {
-        potentialMoves.push([j, i])}}
-  } 
-  let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
-  inputTurn(move[0], move[1])
-}
-
 function checkAcross() {
   for (let i = 0; i < board.length; i++) {
     let boardRow = board[i];
@@ -109,16 +63,43 @@ function checkTie() {
 
 export function checkWin() {
   if (checkAcross()) {
-    setMessage(checkAcross())
-    setGameOver(true);
+    return checkAcross();
   } else if (checkVertical()) {
-    setMessage(checkVertical())
-    setGameOver(true);
+    return checkVertical();
   } else if (checkDiagonal()) {
-    setMessage(checkDiagonal())
-    setGameOver(true);
+    return checkDiagonal();
   } else if (checkTie()) {
-    setMessage(checkTie())
-    setGameOver(true);
+    return checkTie();
   }
+}
+
+export function computerTurn(input) {
+  let potentialMoves = []
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (!board[i][j]) {
+        potentialMoves.push([j, i])}}
+  } 
+  if (potentialMoves.length) {
+  let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
+  return inputTurn(move[0], move[1], input)} else {return board}
+}
+
+export function onePlayer() {
+    document.getElementById("1Player").style.display = "none";
+    document.getElementById("P1-name-input").style.display = "inline";
+}
+
+export function twoPlayer() {
+    document.getElementById("1Player").style.display = "none";
+    document.getElementById("2Player").style.display = "none";
+    document.getElementById("P1-name-input").style.display = "inline";
+    document.getElementById("P2-name-input").style.display = "inline";
+}
+
+export function playerSelectMenu() {
+  document.getElementById("1Player").style.display = "inline";
+  document.getElementById("2Player").style.display = "inline";
+  document.getElementById("P1-name-input").style.display = "none";
+  document.getElementById("P2-name-input").style.display = "none";
 }

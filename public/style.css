@@ -57,6 +57,11 @@ html {
 .clickable {
     cursor: pointer;
 }
+
+#tictactoe-preview {
+    background-image: url("/images/tictactoe.png");
+    background-size: cover;
+}
 /* TICTACTOE CSS */
 .cell {
     width: 100px;
