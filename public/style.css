@@ -88,11 +88,11 @@ html {
     margin-bottom: 20px;
 }
 
-#display-names, .hangman-board {
+#display-names {
     justify-content: space-between;
 }
 
-#tictactoe, #hangman {
+#tictactoe {
     font-size: larger;
 }
 
@@ -107,13 +107,13 @@ html {
     text-align: center;
 }
 
-.highlight:hover {
+.highlight:hover, .active {
     background-color: #20C20E;
     color: black;
 }
 
-.active {
-    background-color: #20C20E;
+.incorrect {
+    background-color: red;
     color: black;
 }
 
@@ -134,6 +134,14 @@ html {
     font-size: 19.2px;
 }
 /* HANGMAN CSS */
+/* #hangman {
+    height: 100%;
+} */
+
+/* .hangman-board {
+    height: 80%;
+} */
+
 #hangman-visual {
     height: 200px;
     aspect-ratio: 2/3;
@@ -169,7 +177,7 @@ html {
 }
 
 #left-arm, #right-arm {
-    height: 32%;
+    height: 33%;
     width: 12%;
     border-top: 12px solid #20C20E;
 }
@@ -225,6 +233,16 @@ html {
 }
 
 #hint {
-    display: none;
-    height: 20px;
+    min-height: 20px;
+    margin: 5px;
+    overflow: auto;
+}
+
+.letter {
+    text-decoration:underline;
+    margin: 5px;
+}
+
+.wrong {
+    color: red;
 }

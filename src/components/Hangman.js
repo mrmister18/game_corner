@@ -13,6 +13,7 @@ const [gameState, setGameState] = useState({
     gameOver: false,
     guesses: []
 })
+const [hint, setHint] = useState(false)
 
     async function getWord() {
             const options = {
@@ -66,7 +67,7 @@ const [gameState, setGameState] = useState({
       </div>
       <div className="title" onClick={() => {console.log(gameState)}}>{gameState.message}</div>
       <div className="row hangman-board">
-          <div className="column">
+          <div className="column" style={{width:"50%"}}>
               <div id="hangman-visual" className="setup column">
                 <div id="rafter" className={gameState.tries >= 8 ? null : "active"}></div>
                 <div className="row" id="between">
@@ -87,14 +88,14 @@ const [gameState, setGameState] = useState({
                 </div>
                 <div id="floor" className={gameState.tries >= 10 ? null : "active"}></div>
               </div>
-              <div className="row" style={{justifyContent:"space-between"}}>
+              <div className="row" style={{justifyContent:"space-between", flexWrap:"wrap"}}>
               {gameState.word.length ? Array.from(gameState.word.toUpperCase()).map((letter) => {
-                return <span className="letter" style={{textDecoration:"underline", margin:"5px"}}
-                >{alphabet.includes(letter) ? gameState.guesses.includes(letter) ? letter : <span>&nbsp;</span> : letter}</span>
+                return <span className={`letter ${gameState.gameOver && !gameState.guesses.includes(letter) ? "wrong" : null}`}
+                >{alphabet.includes(letter) ? gameState.guesses.includes(letter) || gameState.gameOver ? letter : <span>_</span> : letter}</span>
               }) : null}</div>
           </div>
-          <div className="column">
-          <div className="row" style={{width:"65% "}}>
+          <div className="column" style={{width: "50%"}}>
+          <div className="row" style={{height:"50%"}}>
           <div id="alphabet">
           {alphabet.map((letter) => {
             return <span onClick={() => {
@@ -110,16 +111,16 @@ const [gameState, setGameState] = useState({
                     setGameState(gameStateCopy)
                 }
             }}
-            className={`letter smaller-button ${gameState.guesses.includes(letter) ? "active" : gameState.gameOver ? null : `highlight clickable`}`}>{letter}</span>
+            className={`smaller-button ${gameState.guesses.includes(letter) ? gameState.word.toUpperCase().includes(letter) ? "active" : "incorrect" : gameState.gameOver ? null : `highlight clickable`}`}>{letter}</span>
           })}</div>
-          <div className="column">
+          <div className="column" style={{alignItems:"stretch"}}>
           <div className="button highlight clickable" onClick={async () => {
             let gameStateCopy = {...gameState}
             gameStateCopy.message = "Searching..."
             setGameState(gameStateCopy)
             let data = await getWord();
             while (!data.results) {data = await getWord();}
-            document.getElementById("hint").style.display = "none"
+            setHint(false)
             setGameState({
                 word: data.word,
                 definition: data.results[0].definition,
@@ -128,12 +129,12 @@ const [gameState, setGameState] = useState({
                 gameOver: false,
                 guesses: []
             })
-          }}>New Word</div>
+          }}>New Game</div>
           <div className="button highlight clickable"
-          onClick={() => {document.getElementById("hint").style.display = "inline"}}>Hint</div>
+          onClick={() => {setHint(true)}} style={{textAlign:"center"}}>Hint</div>
           </div>
           </div>
-          <div id="hint">{gameState.definition}</div>
+          <div id="hint">{hint || gameState.gameOver ? gameState.definition : null}</div>
           </div>
       </div>
     </div>
