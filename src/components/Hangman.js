@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const { REACT_APP_API_KEY } = process.env;
 
 const Hangman = () => {
   const navigate = useNavigate();
@@ -14,14 +15,13 @@ const [gameState, setGameState] = useState({
     guesses: []
 })
 const [hint, setHint] = useState(false)
-
     async function getWord() {
             const options = {
             method: 'GET',
             url: 'https://wordsapiv1.p.rapidapi.com/words/',
             params: {random: 'true'},
             headers: {
-              'X-RapidAPI-Key': '99b1ff4fcemsh364b18358da03dcp1fb987jsn4f1c5096428f',
+              'X-RapidAPI-Key': REACT_APP_API_KEY,
               'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
             }
           };
@@ -42,7 +42,6 @@ const [hint, setHint] = useState(false)
             }
         } return true
     }
-
     useEffect(() => {
         const getGameWord = async () => {
             let data = await getWord();
@@ -88,13 +87,13 @@ const [hint, setHint] = useState(false)
                 </div>
                 <div id="floor" className={gameState.tries >= 10 ? null : "active"}></div>
               </div>
-              <div className="row" style={{justifyContent:"space-between", flexWrap:"wrap"}}>
+              <div className="row" style={{flexWrap:"wrap"}}>
               {gameState.word.length ? Array.from(gameState.word.toUpperCase()).map((letter) => {
                 return <span className={`letter ${gameState.gameOver && !gameState.guesses.includes(letter) ? "wrong" : null}`}
                 >{alphabet.includes(letter) ? gameState.guesses.includes(letter) || gameState.gameOver ? letter : <span>_</span> : letter}</span>
               }) : null}</div>
           </div>
-          <div className="column" style={{width: "50%"}}>
+          <div className="column" style={{width: "50%", height:"50%"}}>
           <div className="row" style={{height:"50%"}}>
           <div id="alphabet">
           {alphabet.map((letter) => {

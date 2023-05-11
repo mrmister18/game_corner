@@ -233,7 +233,7 @@ html {
 }
 
 #hint {
-    min-height: 20px;
+    height: 100px;
     margin: 5px;
     overflow: auto;
 }
