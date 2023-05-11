@@ -28,24 +28,24 @@ const [gameState, setGameState] = useState({
       <div className="row hangman-board">
           <div className="column">
               <div id="hangman-visual" className="setup column">
-                <div id="rafter" className="active"></div>
+                <div id="rafter" className={gameState.tries >= 8 ? null : "active"}></div>
                 <div className="row" id="between">
                   <div id="hanged-man" className="row">
-                    <div id="left-arm" className=""></div>
+                    <div id="left-arm"></div>
                     <div id="center" className="column">
-                      <div id="rope" className="active"></div>
-                      <div id="head" className="active"></div>
-                      <div id="body" className="active"></div>
+                      <div id="rope" className={gameState.tries >= 7 ? null : "active"}></div>
+                      <div id="head" className={gameState.tries >= 6 ? null : "active"}></div>
+                      <div id="body" className={gameState.tries >= 5 ? null : "active"}></div>
                       <div id="legs" className="row">
-                        <div id="left-leg" className="active"></div>
-                        <div id="right-leg" className="active"></div>
+                        <div id="left-leg" className={gameState.tries >= 2 ? null : "active"}></div>
+                        <div id="right-leg" className={gameState.tries >= 1 ? null : "active"}></div>
                       </div>
                     </div>
-                    <div id="right-arm" className=""></div>
+                    <div id="right-arm"></div>
                   </div>
-                  <div id="pole" className="active"></div>
+                  <div id="pole" className={gameState.tries >= 9 ? null : "active"}></div>
                 </div>
-                <div id="floor" className="active"></div>
+                <div id="floor" className={gameState.tries >= 10 ? null : "active"}></div>
               </div>
               <div className="row" style={{justifyContent:"space-between"}}>
               {Array.from(gameState.word.toUpperCase()).map((letter) => {
