@@ -223,3 +223,8 @@ html {
 .smaller-button {
     padding: 5px;
 }
+
+#hint {
+    display: none;
+    height: 20px;
+}
