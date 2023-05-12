@@ -90,7 +90,7 @@ const [hint, setHint] = useState(false)
               <div className="row" style={{flexWrap:"wrap"}}>
               {gameState.word.length ? Array.from(gameState.word.toUpperCase()).map((letter) => {
                 return <span className={`letter ${gameState.gameOver && !gameState.guesses.includes(letter) ? "wrong" : null}`}
-                >{alphabet.includes(letter) ? gameState.guesses.includes(letter) || gameState.gameOver ? letter : <span>_</span> : letter}</span>
+                style={gameState.guesses.includes(letter) ? null : {textDecoration:"none"}}>{alphabet.includes(letter) ? gameState.guesses.includes(letter) || gameState.gameOver ? letter : <span>_</span> : letter}</span>
               }) : null}</div>
           </div>
           <div className="column" style={{width: "50%", height:"50%"}}>
