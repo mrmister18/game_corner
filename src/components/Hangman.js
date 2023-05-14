@@ -53,7 +53,6 @@ const [hint, setHint] = useState(false)
           };
           getGameWord()
     }, [])
-console.log(REACT_APP_API_KEY)
   return (
     <div id="hangman">
       <div
