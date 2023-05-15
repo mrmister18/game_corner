@@ -63,7 +63,7 @@ const [hint, setHint] = useState(false)
       >
         &lt;-
       </div>
-      <div className="title" onClick={() => {console.log(gameState)}}>{gameState.message}</div>
+      <div className="title">{gameState.message}</div>
       <div className="row hangman-board">
           <div className="column" style={{width:"50%"}}>
               <div id="hangman-visual" className="setup column">
