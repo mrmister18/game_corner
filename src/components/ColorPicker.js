@@ -70,10 +70,10 @@ const ColorPicker = () => {
             }}>Pick Value</span>
         </div> : null}
         {gameState.color && gameState.model && gameState.picking ? <div id='color-guesser-board' className='column'>
-            <div id='color'>{gameState.model === "hex" ? `#${gameState.color}` : gameState.model === "rgb" ? `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})` : `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)`}</div>
+            <div>{gameState.picking === "color" ? gameState.model === "hex" ? `#${gameState.color}` : gameState.model === "rgb" ? `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})` : `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)` : <div className='color' style={gameState.model === "hex" ? {backgroundColor: `#${gameState.color}`} : gameState.model === "rgb" ? {backgroundColor:`rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[1]})`} : {backgroundColor:`hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[1]}%)`}}></div>}</div>
             <div id='color-options' className='row'>
                 {gameState.options.map((option) => {
-                    return <div className='clickable highlight button'>{gameState.model === "hex" ? `#${option}` : gameState.model === "rgb" ? `rgb(${option[0]}, ${option[1]}, ${option[2]})` : `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)`}</div>
+                    return <div className='clickable highlight button'>{gameState.picking === "value" ? gameState.model === "hex" ? `#${option}` : gameState.model === "rgb" ? `rgb(${option[0]}, ${option[1]}, ${option[2]})` : `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)` : <div className='color' style={gameState.model === "hex" ? {backgroundColor: `#${option}`} : gameState.model === "rgb" ? {backgroundColor:`rgb(${option[0]}, ${option[1]}, ${option[1]})`} : {backgroundColor:`hsl(${option[0]}, ${option[1]}%, ${option[1]}%)`}}></div>}</div>
                 })}
             </div>
             </div> : null}

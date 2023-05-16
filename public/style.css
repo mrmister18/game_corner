@@ -249,7 +249,11 @@ html {
 ::-webkit-scrollbar {
     width: 20px;
   }
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #20C20E; 
   }
+
+.color {
+    width: 25px;
+    height: 25px;
+}
