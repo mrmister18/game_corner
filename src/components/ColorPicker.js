@@ -8,6 +8,7 @@ const ColorPicker = () => {
     color: "",
     model: "",
     options: [],
+    guesses: [],
     gameOver: true,
     message: "Pick a Model",
     picking: "",
@@ -107,6 +108,7 @@ const ColorPicker = () => {
               let gameStateCopy = { ...gameState };
               gameStateCopy.picking = "color";
               gameStateCopy.message = "Pick the right color";
+              gameStateCopy.gameOver = false;
               setGameState(gameStateCopy);
             }}
           >
@@ -118,6 +120,7 @@ const ColorPicker = () => {
               let gameStateCopy = { ...gameState };
               gameStateCopy.picking = "value";
               gameStateCopy.message = "Pick the right color value";
+              gameStateCopy.gameOver = false;
               setGameState(gameStateCopy);
             }}
           >
@@ -127,37 +130,35 @@ const ColorPicker = () => {
       ) : null}
       {gameState.color && gameState.model && gameState.picking ? (
         <div id="color-guesser-board" className="column">
-          <div>
-            {gameState.picking === "color" ? (
-              gameState.model === "hex" ? (
-                `#${gameState.color}`
-              ) : gameState.model === "rgb" ? (
-                `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})`
-              ) : (
-                `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)`
-              )
-            ) : (
-              <div
-                className="color"
-                style={
-                  gameState.model === "hex"
-                    ? { backgroundColor: `#${gameState.color}` }
-                    : gameState.model === "rgb"
-                    ? {
-                        backgroundColor: `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[1]})`,
-                      }
-                    : {
-                        backgroundColor: `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[1]}%)`,
-                      }
-                }
-              ></div>
-            )}
+          <div
+            className="color-option button"
+            style={
+              gameState.picking === "value" || gameState.gameOver
+                ? gameState.model === "hex"
+                  ? { backgroundColor: `#${gameState.color}` }
+                  : gameState.model === "rgb"
+                  ? {
+                      backgroundColor: `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})`,
+                    }
+                  : {
+                      backgroundColor: `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)`,
+                    }
+                : null
+            }
+          >
+            {gameState.picking === "color" || gameState.gameOver
+              ? gameState.model === "hex"
+                ? `#${gameState.color}`
+                : gameState.model === "rgb"
+                ? `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})`
+                : `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)`
+              : null}
           </div>
           <div id="color-options" className="row">
             {gameState.options.map((option) => {
               return (
                 <div
-                  className="clickable highlight button"
+                  className="clickable highlight button color-option"
                   onClick={() => {
                     let gameStateCopy = { ...gameState };
                     if (option === gameStateCopy.color) {
@@ -165,34 +166,37 @@ const ColorPicker = () => {
                       gameStateCopy.gameOver = true;
                     } else {
                       gameStateCopy.message = "Try Again";
+                      gameStateCopy.guesses.push(option);
                     }
                     setGameState(gameStateCopy);
                   }}
+                  style={
+                    gameState.picking === "color" ||
+                    gameState.gameOver ||
+                    gameState.guesses.includes(option)
+                      ? gameState.model === "hex"
+                        ? { backgroundColor: `#${option}` }
+                        : gameState.model === "rgb"
+                        ? {
+                            backgroundColor: `rgb(${option[0]}, ${option[1]}, ${option[2]})`,
+                            color: `rgb(${Math.abs(255 - option[0])}, ${Math.abs(255 - option[1])}, ${Math.abs(255 - option[2])})`
+                          }
+                        : {
+                            backgroundColor: `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)`,
+                            color: `hsl(${Math.abs(180 - option[0])}, ${option[1]}%, ${option[2]}%)`
+                          }
+                      : null
+                  }
                 >
-                  {gameState.picking === "value" ? (
-                    gameState.model === "hex" ? (
-                      `#${option}`
-                    ) : gameState.model === "rgb" ? (
-                      `rgb(${option[0]}, ${option[1]}, ${option[2]})`
-                    ) : (
-                      `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)`
-                    )
-                  ) : (
-                    <div
-                      className="color"
-                      style={
-                        gameState.model === "hex"
-                          ? { backgroundColor: `#${option}` }
-                          : gameState.model === "rgb"
-                          ? {
-                              backgroundColor: `rgb(${option[0]}, ${option[1]}, ${option[1]})`,
-                            }
-                          : {
-                              backgroundColor: `hsl(${option[0]}, ${option[1]}%, ${option[1]}%)`,
-                            }
-                      }
-                    ></div>
-                  )}
+                  {gameState.guesses.includes(option) ||
+                  gameState.picking === "value" ||
+                  gameState.gameOver
+                    ? gameState.model === "hex"
+                      ? `#${option}`
+                      : gameState.model === "rgb"
+                      ? `rgb(${option[0]}, ${option[1]}, ${option[2]})`
+                      : `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)`
+                    : null}
                 </div>
               );
             })}

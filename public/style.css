@@ -257,3 +257,14 @@ html {
     width: 100px;
     height: 100px;
 }
+
+.color-option {
+    width: 288px;
+    height: 16px;
+    text-align: center;
+}
+
+#color-options {
+    max-width: 650px;
+    flex-wrap: wrap;
+}

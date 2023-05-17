@@ -19,3 +19,13 @@ export function randomColor(model) {
     if (model === "rgb") {return randomRGB()}
     if (model === "hsl") {return randomHSL()}
 }
+
+export function hexToRGB(hex) {
+    var aRgbHex = hex.match(/.{1,2}/g);
+    var aRgb = [
+        parseInt(aRgbHex[0], 16),
+        parseInt(aRgbHex[1], 16),
+        parseInt(aRgbHex[2], 16)
+    ];
+    return aRgb;
+}
