@@ -5,7 +5,7 @@ const StartMenu = () => {
     const navigate = useNavigate()
 
     return <div id='games-menu'>
-        <h1>Choose a Game</h1>
+        <h1 style={{textAlign:"center"}}>Choose a Game</h1>
         <div id='game-options'>
             <div>
        <div className='game-option clickable' id='tictactoe-preview' onClick={() => {navigate("/tictactoe")}}>

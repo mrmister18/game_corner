@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { randomColor } from "../game_logic/colorpicker";
+import { hslToRGB, randomColor, hexToRGB } from "../game_logic/colorpicker";
 
 const ColorPicker = () => {
   const navigate = useNavigate();
@@ -135,13 +135,20 @@ const ColorPicker = () => {
             style={
               gameState.picking === "value" || gameState.gameOver
                 ? gameState.model === "hex"
-                  ? { backgroundColor: `#${gameState.color}` }
+                  ? { backgroundColor: `#${gameState.color}`,
+                  color: `rgb(${Math.abs(255 - hexToRGB(gameState.color)[0])}, ${Math.abs(255 - hexToRGB(gameState.color)[1])}, ${Math.abs(255 - hexToRGB(gameState.color)[2])})`,
+                  border: '1px solid white'
+                 }
                   : gameState.model === "rgb"
                   ? {
                       backgroundColor: `rgb(${gameState.color[0]}, ${gameState.color[1]}, ${gameState.color[2]})`,
+                      color: `rgb(${Math.abs(255 - gameState.color[0])}, ${Math.abs(255 - gameState.color[1])}, ${Math.abs(255 - gameState.color[2])})`,
+                      border: '1px solid white'
                     }
                   : {
                       backgroundColor: `hsl(${gameState.color[0]}, ${gameState.color[1]}%, ${gameState.color[2]}%)`,
+                      color: `rgb(${Math.abs(255 - hslToRGB(gameState.color)[0])}, ${Math.abs(255 - hslToRGB(gameState.color)[1])}, ${Math.abs(255 - hslToRGB(gameState.color)[2])})`,
+                      border: '1px solid white'
                     }
                 : null
             }
@@ -156,10 +163,12 @@ const ColorPicker = () => {
           </div>
           <div id="color-options" className="row">
             {gameState.options.map((option) => {
+              
               return (
                 <div
-                  className="clickable highlight button color-option"
+                  className={`${gameState.gameOver || gameState.guesses.includes(option) ? null : "clickable highlight"} button color-option`}
                   onClick={() => {
+                    if (gameState.gameOver) {return}
                     let gameStateCopy = { ...gameState };
                     if (option === gameStateCopy.color) {
                       gameStateCopy.message = "You Win!";
@@ -175,7 +184,8 @@ const ColorPicker = () => {
                     gameState.gameOver ||
                     gameState.guesses.includes(option)
                       ? gameState.model === "hex"
-                        ? { backgroundColor: `#${option}` }
+                        ? { backgroundColor: `#${option}`,
+                      color: `rgb(${Math.abs(255 - hexToRGB(option)[0])}, ${Math.abs(255 - hexToRGB(option)[1])}, ${Math.abs(255 - hexToRGB(option)[2])})` }
                         : gameState.model === "rgb"
                         ? {
                             backgroundColor: `rgb(${option[0]}, ${option[1]}, ${option[2]})`,
@@ -183,7 +193,7 @@ const ColorPicker = () => {
                           }
                         : {
                             backgroundColor: `hsl(${option[0]}, ${option[1]}%, ${option[2]}%)`,
-                            color: `hsl(${Math.abs(180 - option[0])}, ${option[1]}%, ${option[2]}%)`
+                            color: `rgb(${Math.abs(255 - hslToRGB(option)[0])}, ${Math.abs(255 - hslToRGB(option)[1])}, ${Math.abs(255 - hslToRGB(option)[2])})`
                           }
                       : null
                   }
@@ -200,6 +210,43 @@ const ColorPicker = () => {
                 </div>
               );
             })}
+          </div>
+          <div className="row">
+            <div className="button highlight clickable"
+            onClick={() => {
+              let gameStateCopy = { ...gameState };
+              gameStateCopy.color = randomColor(gameState.model);
+              gameStateCopy.options = []
+              for (let i = 0; i < gameState.options.length - 1; i++) {
+                let color = randomColor(gameState.model);
+                while (color === gameState.color) {
+                  color = randomColor(gameState.model);
+                }
+                gameStateCopy.options.push(randomColor(gameState.model));
+              }
+              gameStateCopy.options.splice(
+                Math.floor(
+                  Math.random() * gameStateCopy.options.length + 1
+                ),
+                0,
+                gameStateCopy.color
+              );
+              gameStateCopy.message = "Pick the Color";
+              gameStateCopy.gameOver = false
+              setGameState(gameStateCopy);
+            }}>New Game</div>
+            <div className="button highlight clickable"
+            onClick={() => {
+              setGameState({
+                color: "",
+                model: "",
+                options: [],
+                guesses: [],
+                gameOver: true,
+                message: "Pick a Model",
+                picking: "",
+              })
+            }}>Settings</div>
           </div>
         </div>
       ) : null}
