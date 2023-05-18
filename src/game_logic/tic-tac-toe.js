@@ -81,6 +81,18 @@ export function computerTurn(input) {
         potentialMoves.push([j, i])}}
   } 
   if (potentialMoves.length) {
+    for (let i = 0; i < potentialMoves.length; i++) {
+      inputTurn(potentialMoves[i][0], potentialMoves[i][1], input)
+      if (checkWin()) {
+      return inputTurn(potentialMoves[i][0], potentialMoves[i][1], input)}
+      inputTurn(potentialMoves[i][0], potentialMoves[i][1], null)
+    }
+    for (let i = 0; i < potentialMoves.length; i++) {
+      inputTurn(potentialMoves[i][0], potentialMoves[i][1], "X")
+      if (checkWin()) {
+      return inputTurn(potentialMoves[i][0], potentialMoves[i][1], input)}
+      inputTurn(potentialMoves[i][0], potentialMoves[i][1], null)
+    }
   let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
   return inputTurn(move[0], move[1], input)} else {return board}
 }

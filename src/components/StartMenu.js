@@ -14,8 +14,8 @@ const StartMenu = () => {
        <div className='game-option clickable' id='hangman-preview' onClick={() => {navigate("/hangman")}}>
        </div>HANGMAN</div>
        <div>
-       <div className='game-option clickable' id='color-guesser-preview' onClick={() => {navigate("/colorpicker")}}>
-       </div>COLOR GUESSER</div>
+       <div className='game-option clickable' id='color-picker-preview' onClick={() => {navigate("/colorpicker")}}>
+       </div>COLOR PICKER</div>
        </div>
     </div>
 }

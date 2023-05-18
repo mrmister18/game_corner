@@ -68,6 +68,11 @@ html {
     background-image: url("/images/hangman.png");
     background-size: cover;
 }
+
+#color-picker-preview {
+    background-image: url("/images/Screenshot 2023-05-17 181740.png");
+    background-size: cover;
+}
 /* TICTACTOE CSS */
 .cell {
     width: 100px;
@@ -267,4 +272,9 @@ html {
 #color-options {
     max-width: 650px;
     flex-wrap: wrap;
+}
+
+#color-guesser {
+    height: 100%;
+    width: 100%;
 }
