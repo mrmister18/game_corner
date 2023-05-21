@@ -27,10 +27,7 @@ const ColorPicker = () => {
       <div className="column">
         <div
           className="title"
-          onClick={() => {
-            console.log(gameState);
-          }}
-        >
+          >
           {gameState.message}
         </div>
         {gameState.model ? null : (
