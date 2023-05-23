@@ -29,7 +29,10 @@ const StartMenu = () => {
         &lt;-
       </div><div>
        <div className='game-option clickable' id='connect-four-preview' onClick={() => {navigate("/connectfour")}}>
-       </div>CONNECT FOUR</div></> : null}
+       </div>CONNECT FOUR</div>
+       <div>
+       <div className='game-option clickable' id='simon-says-preview' onClick={() => {navigate("/simonsays")}}>
+       </div>SIMON SAYS</div></> : null}
        </div>
     </div>
 }
