@@ -93,3 +93,45 @@ export function inputTurn(x, token, board) {
         }
     } return "Tie!"
   }
+
+  export function computerTurn(input, board) {
+    let potentialMoves = []
+    for (let i = 0; i < board[0].length; i++) {
+        if (!board[0][i]) {
+          potentialMoves.push(i)}
+    } 
+    if (potentialMoves.length) {
+      for (let i = 0; i < potentialMoves.length; i++) {
+        inputTurn(potentialMoves[i], input, board)
+        if (checkWin(input, board, "Computer")) {
+        return inputTurn(potentialMoves[i], input, board)}
+        inputTurn(potentialMoves[i], 0, board)
+      }
+      for (let i = 0; i < potentialMoves.length; i++) {
+        inputTurn(potentialMoves[i], "R", board)
+        if (checkWin("R", board, "Player")) {
+        return inputTurn(potentialMoves[i], input, board)}
+        inputTurn(potentialMoves[i], 0, board)
+      }
+    let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
+    return inputTurn(move, input, board)} else {return board}
+  }
+
+  export function onePlayer() {
+    document.getElementById("1Player").style.display = "none";
+    document.getElementById("P1-name-input").style.display = "inline";
+}
+
+export function twoPlayer() {
+    document.getElementById("1Player").style.display = "none";
+    document.getElementById("2Player").style.display = "none";
+    document.getElementById("P1-name-input").style.display = "inline";
+    document.getElementById("P2-name-input").style.display = "inline";
+}
+
+export function playerSelectMenu() {
+    document.getElementById("1Player").style.display = "inline";
+    document.getElementById("2Player").style.display = "inline";
+    document.getElementById("P1-name-input").style.display = "none";
+    document.getElementById("P2-name-input").style.display = "none";
+  }

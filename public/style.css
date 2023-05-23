@@ -99,7 +99,7 @@ html {
     margin-bottom: 20px;
 }
 
-#display-names {
+#display-names, #connect-four {
     justify-content: space-between;
 }
 
