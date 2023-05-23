@@ -28,6 +28,7 @@ const TicTacToe = () => {
   });
   const [playerSelect, setPlayerSelect] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState([]);
+  const [preview, setPreview] = useState([])
 
   function switchPlayers() {
     let gameStateCopy = { ...gameState };
@@ -78,14 +79,17 @@ const TicTacToe = () => {
                 arr.push(
                   <div
                     className={`cell ${
-                      gameState.gameOver || gameState.message === "Thinking..."
+                      gameState.gameOver || gameState.message === "Thinking..." || gameState.board[idx][i]
                         ? null
                         : "clickable"
                     }`}
+                    onMouseEnter={() => setPreview([idx, i])}
+                    onMouseLeave={() => setPreview([])}
                     onClick={() => {
                       if (
                         !gameState.gameOver &&
-                        gameState.message !== "Thinking..."
+                        gameState.message !== "Thinking..." &&
+                        !gameState.board[idx][i]
                       ) {
                         let gameStateCopy = { ...gameState };
                         gameStateCopy.board = inputTurn(
@@ -123,7 +127,7 @@ const TicTacToe = () => {
                       }
                     }}
                   >
-                    <span>{gameState.board[idx][i]}</span>
+                    <span style={gameState.board[idx][i] ? null : {opacity: "0.5"}}>{gameState.board[idx][i] ? gameState.board[idx][i] : !gameState.gameOver && preview[0] === idx && preview[1] === i ? currentPlayer[0] : null}</span>
                   </div>
                 );
               }

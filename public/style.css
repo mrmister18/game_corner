@@ -73,6 +73,11 @@ html {
     background-image: url("/images/Screenshot 2023-05-17 181740.png");
     background-size: cover;
 }
+
+#connect-four-preview {
+    background-image: url("/images/Screenshot 2023-05-23 095912.png");
+    background-size: cover;
+}
 /* TICTACTOE CSS */
 .cell {
     width: 100px;
@@ -130,6 +135,7 @@ html {
 
 .button {
     padding: 15px 10px;
+    text-align: center;
 }
 
 .back-button {
