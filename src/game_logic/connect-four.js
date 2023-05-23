@@ -94,6 +94,13 @@ export function inputTurn(x, token, board) {
     } return "Tie!"
   }
 
+  function undoTurn(x, board) {
+    for (let i = 0; i < board.length; i++) {
+        if (board[i][x]) {board[i][x] = 0
+                          return board}
+      } return board
+  }
+
   export function computerTurn(input, board) {
     let potentialMoves = []
     for (let i = 0; i < board[0].length; i++) {
@@ -104,17 +111,20 @@ export function inputTurn(x, token, board) {
       for (let i = 0; i < potentialMoves.length; i++) {
         inputTurn(potentialMoves[i], input, board)
         if (checkWin(input, board, "Computer")) {
+            undoTurn(potentialMoves[i], board)
         return inputTurn(potentialMoves[i], input, board)}
-        inputTurn(potentialMoves[i], 0, board)
+        undoTurn(potentialMoves[i], board)
       }
       for (let i = 0; i < potentialMoves.length; i++) {
         inputTurn(potentialMoves[i], "R", board)
         if (checkWin("R", board, "Player")) {
+            undoTurn(potentialMoves[i], board)
         return inputTurn(potentialMoves[i], input, board)}
-        inputTurn(potentialMoves[i], 0, board)
+        undoTurn(potentialMoves[i], board)
       }
     let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
-    return inputTurn(move, input, board)} else {return board}
+    return inputTurn(move, input, board)
+} else {return board}
   }
 
   export function onePlayer() {

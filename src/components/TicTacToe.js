@@ -148,6 +148,7 @@ const TicTacToe = () => {
                   let gameStateCopy = { ...gameState };
                   gameStateCopy.playerNumbers = 1;
                   gameStateCopy.players[1][1] = "Computer";
+                  gameStateCopy.message = "Name?"
                   setGameState(gameStateCopy);
                 }
               }}
@@ -181,6 +182,7 @@ const TicTacToe = () => {
                   twoPlayer();
                   let gameStateCopy = { ...gameState };
                   gameStateCopy.playerNumbers = 2;
+                  gameStateCopy.message = "Names?"
                   setGameState(gameStateCopy);
                 }
               }}
