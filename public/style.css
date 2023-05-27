@@ -303,7 +303,7 @@ html {
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
   
-  border-bottom: 100px solid red;
+  border-bottom: 100px solid #8f596c;
 }
 
 #green {
@@ -312,7 +312,7 @@ html {
   border-top: 100px solid transparent;
   border-bottom: 100px solid transparent;
   
-  border-right: 100px solid green;
+  border-right: 100px solid #578d8b;
 }
 
 #yellow {
@@ -321,7 +321,7 @@ html {
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
   
-  border-top: 100px solid yellow;
+  border-top: 100px solid #94827e;
 }
 
 #blue {
@@ -330,11 +330,12 @@ html {
   border-top: 100px solid transparent;
   border-bottom: 100px solid transparent;
   
-  border-left: 100px solid blue;
+  border-left: 100px solid #507e9f;
 }
 
 #simon-center {
     width: 200px;
     height: 200px;
-    text-align: center;
+    background-color: grey;
+    font-size: 100px;
 }
