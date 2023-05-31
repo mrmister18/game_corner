@@ -78,6 +78,11 @@ html {
     background-image: url("/images/Screenshot 2023-05-23 095912.png");
     background-size: cover;
 }
+
+#simon-says-preview {
+    background-image: url("/images/Screenshot 2023-05-30 214105.png");
+    background-size: cover;
+}
 /* TICTACTOE CSS */
 .cell {
     width: 100px;
