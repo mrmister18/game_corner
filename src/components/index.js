@@ -4,3 +4,4 @@ export { default as Hangman } from './Hangman';
 export { default as ColorPicker } from './ColorPicker';
 export { default as ConnectFour } from './ConnectFour';
 export { default as SimonSays } from './SimonSays'
+export { default as Blackjack } from './Blackjack'

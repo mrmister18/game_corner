@@ -32,7 +32,10 @@ const StartMenu = () => {
        </div>CONNECT FOUR</div>
        <div>
        <div className='game-option clickable' id='simon-says-preview' onClick={() => {navigate("/simonsays")}}>
-       </div>SIMON SAYS</div></> : null}
+       </div>SIMON SAYS</div>
+       <div>
+       <div className='game-option clickable' id='blackjack-preview' onClick={() => {navigate("/blackjack")}}>
+       </div>BLACKJACK</div></> : null}
        </div>
     </div>
 }
