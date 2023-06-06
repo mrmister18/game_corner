@@ -1,3 +1,4 @@
+// FISHER-YATES SHUFFLE
 export function shuffle(array) {
   var m = array.length, t, i;
 
@@ -19,3 +20,10 @@ export function deal(hand) {
     deck.splice(idx, 1)
     return hand
   }
+
+export function suit(suit) {
+    if (suit === "spades") {return "\u2660"}
+    else if (suit === "clubs") {return "\u2663"}
+    else if (suit === "hearts") {return "\u2665"}
+    else {return "\u2666"}
+}
