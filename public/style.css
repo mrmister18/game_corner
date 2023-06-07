@@ -347,6 +347,7 @@ html {
 /*  BLACKJACK CSS */
 .card {
     aspect-ratio: 2/3;
+    width: 50px;
     border: 1px solid #20C20E;
     text-align: center;
     font-size: 15px;
