@@ -17,6 +17,7 @@ const Blackjack = () => {
     },
     gameOver: true,
     bet: 1,
+    message: "BLACKJACK"
   });
   const [dealerTurn, setDealerTurn] = useState(false);
 
@@ -61,12 +62,13 @@ const Blackjack = () => {
       </div>
       <div className="row">
         <div className="column">
-        <div>{dealerTurn ? gameState.dealer.points : null}</div>
+          <div className="title">{gameState.message}</div>
+        <div>{dealerTurn || (gameState.dealer.hand.length && gameState.gameOver) ? gameState.dealer.points : null}</div>
           <div className="row">
             {gameState.dealer.hand.map((card, idx) => {
               return (
                 <div className="card">
-                  {idx === 0 && !dealerTurn ? null : <><div>{card.value}</div>
+                  {idx === 0 && !dealerTurn && !gameState.gameOver ? null : <><div>{card.value}</div>
                   <div className="suit">{suit(card.suit)}</div></>}
                 </div>
               );
@@ -86,7 +88,7 @@ const Blackjack = () => {
               );
             })}
           </div>
-          <div>{gameState.player.points}</div>
+          {gameState.player.hand.length ? <div>{gameState.player.points}</div> : null}
         </div>
         <div className="column">
           <div
@@ -128,6 +130,9 @@ const Blackjack = () => {
               className="button clickable highlight"
               onClick={() => {
                 let gameStateCopy = { ...gameState };
+                gameStateCopy.deck = gameStateCopy.deck.concat(gameStateCopy.player.hand, gameStateCopy.dealer.hand)
+          gameStateCopy.player.hand = []
+          gameStateCopy.dealer.hand = []
                 gameStateCopy.deck = shuffle(gameStateCopy.deck);
                 function initDeal(hand) {
                   hand.push(gameStateCopy.deck[0]);
@@ -142,7 +147,9 @@ const Blackjack = () => {
                 gameStateCopy.gameOver = false;
                 gameStateCopy.player.points = pointTally(gameStateCopy.player.hand)
                 gameStateCopy.dealer.points = pointTally(gameStateCopy.dealer.hand)
+                gameStateCopy.message = "PLAYER'S TURN"
                 setGameState(gameStateCopy);
+                setDealerTurn(false)
               }}
             >
               DEAL
@@ -161,6 +168,9 @@ const Blackjack = () => {
                 }
                 gameStateCopy.player.hand = hit(gameStateCopy.player.hand);
                 gameStateCopy.player.points = pointTally(gameStateCopy.player.hand)
+                if (gameStateCopy.player.points > 21) {gameStateCopy.message = "BUST"
+              gameStateCopy.gameOver = true
+            }
                 setGameState(gameStateCopy)
               }}
             >
@@ -168,6 +178,16 @@ const Blackjack = () => {
             </div>
             <div className="button highlight clickable" onClick={() => {
               setDealerTurn(true)
+              let gameStateCopy = { ...gameState };
+              function hit(hand) {
+                let gameStateCopy = { ...gameState };
+                hand.push(gameStateCopy.deck[0]);
+                gameStateCopy.deck.splice(0, 1);
+                return hand;
+              }
+              while (gameStateCopy.dealer.points < 17) {gameStateCopy.dealer.hand = hit(gameStateCopy.dealer.hand)
+                gameStateCopy.dealer.points = pointTally(gameStateCopy.dealer.hand)}
+                setGameState(gameStateCopy)
             }}>STAND</div>
             </>
           )}
